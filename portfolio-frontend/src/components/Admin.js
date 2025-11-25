@@ -4,7 +4,8 @@ import { useNavigate } from "react-router-dom";
 
 import { API_BASE_URL } from "../config"; // Import the URL
 
-const API_URL = `${API_BASE_URL}/portfolio`; // Use the variable
+// const API_URL = `${API_BASE_URL}/portfolio`; // Use the variable
+const API_URL = "https://my-portfolio-backend-cy4q.onrender.com/api/portfolio";
 
 function Admin() {
   const [formData, setFormData] = useState(null);
