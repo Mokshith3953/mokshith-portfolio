@@ -1,8 +1,8 @@
-import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+import React, { useState, useEffect } from "react";
+import axios from "axios";
+import { API_BASE_URL } from "../config"; // Import the URL
 
-const API_URL = 'http://localhost:5000/api/portfolio';
-
+const API_URL = `${API_BASE_URL}/portfolio`; // Use the variable
 function Portfolio() {
   const [portfolio, setPortfolio] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -56,10 +56,21 @@ function Portfolio() {
         <div className="projects-container">
           {portfolio.projects.map((project) => (
             <div key={project._id} className="project-card">
-              {project.image && <img src={project.image} alt={project.title} className="project-image" />}
+              {project.image && (
+                <img
+                  src={project.image}
+                  alt={project.title}
+                  className="project-image"
+                />
+              )}
               <h3>{project.title}</h3>
               <p>{project.description}</p>
-              <a href={project.link} target="_blank" rel="noopener noreferrer" className="btn-project">
+              <a
+                href={project.link}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="btn-project"
+              >
                 View Project
               </a>
             </div>
@@ -86,8 +97,20 @@ function Portfolio() {
         <h2>Contact</h2>
         <div className="contact-links">
           <a href={`mailto:${portfolio.contact.email}`}>Email</a>
-          <a href={portfolio.contact.linkedin} target="_blank" rel="noopener noreferrer">LinkedIn</a>
-          <a href={portfolio.contact.github} target="_blank" rel="noopener noreferrer">GitHub</a>
+          <a
+            href={portfolio.contact.linkedin}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            LinkedIn
+          </a>
+          <a
+            href={portfolio.contact.github}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            GitHub
+          </a>
           <p>Phone: {portfolio.contact.phone}</p>
         </div>
       </div>

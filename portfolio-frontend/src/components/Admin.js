@@ -1,8 +1,10 @@
-import React, { useState, useEffect } from 'react';
-import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
+import React, { useState, useEffect } from "react";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
-const API_URL = 'http://localhost:5000/api/portfolio';
+import { API_BASE_URL } from "../config"; // Import the URL
+
+const API_URL = `${API_BASE_URL}/portfolio`; // Use the variable
 
 function Admin() {
   const [formData, setFormData] = useState(null);
@@ -11,9 +13,9 @@ function Admin() {
 
   useEffect(() => {
     const loadAdminData = async () => {
-      const token = localStorage.getItem('token');
+      const token = localStorage.getItem("token");
       if (!token) {
-        navigate('/login');
+        navigate("/login");
         return;
       }
 
@@ -22,9 +24,9 @@ function Admin() {
         setFormData(res.data);
         setLoading(false);
       } catch (err) {
-        console.error('Error fetching portfolio data', err);
+        console.error("Error fetching portfolio data", err);
         if (err.response && err.response.status === 401) {
-          navigate('/login');
+          navigate("/login");
         }
       }
     };
@@ -86,16 +88,16 @@ function Admin() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const token = localStorage.getItem('token');
+      const token = localStorage.getItem("token");
       await axios.put(API_URL, formData, {
         headers: {
-          'x-auth-token': token,
+          "x-auth-token": token,
         },
       });
-      alert('Portfolio Updated Successfully!');
+      alert("Portfolio Updated Successfully!");
     } catch (err) {
-      console.error('Error updating portfolio', err);
-      alert('Error updating portfolio. Your session may have expired.');
+      console.error("Error updating portfolio", err);
+      alert("Error updating portfolio. Your session may have expired.");
     }
   };
 
@@ -162,7 +164,7 @@ function Admin() {
               <button
                 type="button"
                 className="btn-remove"
-                onClick={() => removeArrayItem(index, 'skills')}
+                onClick={() => removeArrayItem(index, "skills")}
               >
                 Remove
               </button>
@@ -172,21 +174,21 @@ function Admin() {
               type="text"
               name="name"
               value={skill.name}
-              onChange={(e) => handleArrayChange(e, index, 'skills')}
+              onChange={(e) => handleArrayChange(e, index, "skills")}
             />
             <label>Level (e.g., 80%):</label>
             <input
               type="text"
               name="level"
               value={skill.level}
-              onChange={(e) => handleArrayChange(e, index, 'skills')}
+              onChange={(e) => handleArrayChange(e, index, "skills")}
             />
           </div>
         ))}
         <button
           type="button"
           className="btn-add"
-          onClick={() => addArrayItem('skills', { name: '', level: '' })}
+          onClick={() => addArrayItem("skills", { name: "", level: "" })}
         >
           + Add Skill
         </button>
@@ -202,7 +204,7 @@ function Admin() {
               <button
                 type="button"
                 className="btn-remove"
-                onClick={() => removeArrayItem(index, 'projects')}
+                onClick={() => removeArrayItem(index, "projects")}
               >
                 Remove
               </button>
@@ -212,27 +214,27 @@ function Admin() {
               type="text"
               name="title"
               value={project.title}
-              onChange={(e) => handleArrayChange(e, index, 'projects')}
+              onChange={(e) => handleArrayChange(e, index, "projects")}
             />
             <label>Description:</label>
             <textarea
               name="description"
               value={project.description}
-              onChange={(e) => handleArrayChange(e, index, 'projects')}
+              onChange={(e) => handleArrayChange(e, index, "projects")}
             />
             <label>Project Link:</label>
             <input
               type="text"
               name="link"
               value={project.link}
-              onChange={(e) => handleArrayChange(e, index, 'projects')}
+              onChange={(e) => handleArrayChange(e, index, "projects")}
             />
             <label>Image URL:</label>
             <input
               type="text"
               name="image"
               value={project.image}
-              onChange={(e) => handleArrayChange(e, index, 'projects')}
+              onChange={(e) => handleArrayChange(e, index, "projects")}
             />
           </div>
         ))}
@@ -240,11 +242,11 @@ function Admin() {
           type="button"
           className="btn-add"
           onClick={() =>
-            addArrayItem('projects', {
-              title: '',
-              description: '',
-              link: '',
-              image: '',
+            addArrayItem("projects", {
+              title: "",
+              description: "",
+              link: "",
+              image: "",
             })
           }
         >
@@ -262,7 +264,7 @@ function Admin() {
               <button
                 type="button"
                 className="btn-remove"
-                onClick={() => removeArrayItem(index, 'education')}
+                onClick={() => removeArrayItem(index, "education")}
               >
                 Remove
               </button>
@@ -272,21 +274,21 @@ function Admin() {
               type="text"
               name="degree"
               value={edu.degree}
-              onChange={(e) => handleArrayChange(e, index, 'education')}
+              onChange={(e) => handleArrayChange(e, index, "education")}
             />
             <label>School:</label>
             <input
               type="text"
               name="school"
               value={edu.school}
-              onChange={(e) => handleArrayChange(e, index, 'education')}
+              onChange={(e) => handleArrayChange(e, index, "education")}
             />
             <label>Year (e.g., 2020-2024):</label>
             <input
               type="text"
               name="year"
               value={edu.year}
-              onChange={(e) => handleArrayChange(e, index, 'education')}
+              onChange={(e) => handleArrayChange(e, index, "education")}
             />
           </div>
         ))}
@@ -294,7 +296,7 @@ function Admin() {
           type="button"
           className="btn-add"
           onClick={() =>
-            addArrayItem('education', { degree: '', school: '', year: '' })
+            addArrayItem("education", { degree: "", school: "", year: "" })
           }
         >
           + Add Education
